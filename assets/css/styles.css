@@ -112,10 +112,12 @@ blockquote{
   }
   .mobile-header-layout {
     justify-content: space-between !important;
+    gap: 1rem !important;
   }
   .mobile-header-layout h1 {
     flex-shrink: 1;
     min-width: 0;
     white-space: nowrap;
+    font-size: 2rem !important;
   }
 }

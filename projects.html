@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réalisations — Adrien AKILAL</title>
+  <meta name="description" content="Réalisations data : reporting décisionnel, analyses exploratoires, web analytics, qualité des données et projets IA." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+
+  <style>
+    :root{
+      /* ✅ 2 COULEURS UNIQUES */
+      --blue-soft: rgba(13,110,253,.12);
+      --blue-strong: rgba(13,110,253,.25);
+
+      --purple-soft: rgba(111,66,193,.14);
+      --purple-strong: rgba(111,66,193,.28);
+
+      --ink: #0b1220;
+    }
+    .projects-hero{
+      background: linear-gradient(135deg, var(--blue-soft), var(--purple-soft));
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: 18px 18px;
+    }
+    .rubric{
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,.06);
+      overflow: hidden;
+    }
+    .rubric .rubric-bar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(6px);
+    }
+    .rubric .rubric-title{
+      margin:0;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -.2px;
+    }
+    .rubric .rubric-sub{
+      margin: 0;
+      color: rgba(11,18,32,.65);
+      font-size: .95rem;
+    }
+    .rubric .rubric-badge{
+      font-size: .78rem;
+      padding: .35rem .6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.75);
+      color: rgba(11,18,32,.8);
+      white-space: nowrap;
+    }
+
+    /* ✅ TOUTES LES RUBRIQUES BNP EN BLEU */
+    .rubric--pilotage{ background: linear-gradient(135deg, var(--blue-soft), rgba(255,255,255,.65)); }
+    .rubric--exploratoire{ background: linear-gradient(135deg, var(--blue-soft), rgba(255,255,255,.65)); }
+    .rubric--qualite{ background: linear-gradient(135deg, var(--blue-soft), rgba(255,255,255,.65)); }
+
+    .preview-card{
+      border-radius: 16px !important;
+      border: 1px solid rgba(0,0,0,.06) !important;
+      box-shadow: 0 10px 24px rgba(0,0,0,.05);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(0,0,0,.08);
+    }
+    .preview-card:focus{
+      outline: 2px solid rgba(13,110,253,.35);
+      outline-offset: 2px;
+    }
+    .preview-card::before{
+      content:"";
+      position:absolute;
+      inset: 0 0 auto 0;
+      height: 64px;
+      opacity: .85;
+    }
+    .preview-card > *{ position: relative; z-index: 1; }
+
+    /* ✅ BNP (BLEU) : pilotage + exploratoire + qualite */
+    .preview-card.pilotage::before,
+    .preview-card.exploratoire::before,
+    .preview-card.qualite::before{
+      background: linear-gradient(90deg, var(--blue-strong), var(--blue-soft));
+    }
+    .preview-card.pilotage:hover,
+    .preview-card.exploratoire:hover,
+    .preview-card.qualite:hover{
+      border-color: var(--blue-strong) !important;
+    }
+
+    /* ✅ AUTRES RÉALISATIONS (VIOLET) : on ajoute la classe "other" aux 3 cartes */
+    .preview-card.other::before{
+      background: linear-gradient(90deg, var(--purple-strong), var(--purple-soft));
+    }
+    .preview-card.other:hover{
+      border-color: var(--purple-strong) !important;
+    }
+
+    .preview-cta{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color: rgba(11,18,32,.65);
+      font-size: .85rem;
+      margin-top: 8px;
+    }
+    .preview-cta .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(13,110,253,.6);
+    }
+
+    /* ✅ DOTS BNP en BLEU */
+    .preview-card.pilotage .dot,
+    .preview-card.exploratoire .dot,
+    .preview-card.qualite .dot{
+      background: rgba(13,110,253,.6);
+    }
+
+    /* ✅ DOTS AUTRES en VIOLET */
+    .preview-card.other .dot{
+      background: rgba(111,66,193,.6);
+    }
+
+    .modal-content{
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 24px 60px rgba(0,0,0,.18);
+    }
+    .modal-header{
+      background: linear-gradient(135deg, var(--blue-soft), rgba(255,255,255,.8));
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .modal-title{ color: var(--ink); }
+
+    button.card{ background: transparent; }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">Adrien AKILAL</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="experience.html">Parcours</a></li>
+        <li class="nav-item"><a class="nav-link active" href="projects.html">Réalisations</a></li>
+        <li class="nav-item"><a class="nav-link" href="skills.html">Compétences</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-outline-primary btn-sm" href="en/projects.html">EN</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="py-5">
+  <div class="container">
+
+    <header class="mb-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+        <div>
+          <h1 class="h3 fw-bold mb-2">Réalisations Data</h1>
+          <p class="text-secondary mb-0">
+            Une sélection de projets orientés analyse, pilotage de la performance et aide à la décision. <br>
+            <strong>cliquez sur les cartes pour ouvrir le détail.</strong>
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- PARTIE 1 : EXPERIENCE ACTUELLE (BNP PARIBAS) -->
+    <section class="mb-5">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3 p-3" style="background: linear-gradient(135deg, rgba(30, 30, 31, 0.08), rgba(255,255,255,.65)); border-radius: 12px; border: 1px solid rgba(0,0,0,.06);">
+        <div>
+          <h2 class="h4 fw-bold section-title mb-1">Réalisations chez BNP Paribas - DATA ANALYST</h2>
+        </div>
+        <div class="d-flex gap-2">
+          <a class="btn btn-primary btn-sm" href="experience-bnp.html">Voir l'expérience →</a>
+        </div>
+        <div class="text-secondary">Dashboards décisionnels, analyses exploratoires, web analytics & fiabilisation de la donnée.</div> <br>
+      </div>
+
+      <!-- RUBRIQUE 1 : PILOTAGE -->
+      <section class="mb-3 rubric rubric--pilotage">
+        <div class="rubric-bar">
+          <div>
+            <h3 class="h5 rubric-title">Pilotage & reporting décisionnel</h3>
+            <p class="rubric-sub mb-0">Suivi de la performance · aide à la décision · dashboards métier</p>
+          </div>
+          <span class="rubric-badge">Excel - Power BI - SQL - Gestion de projets</span>
+        </div>
+      </section>
+
+      <div class="row g-3 mb-4">
+        <!-- Preview 1 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card pilotage p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p1Cockpit">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Cockpit Data 360°</div>
+                <div class="small text-secondary">Pilotage 360° — Direction</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Preview 2 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card pilotage p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p2Canaux">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Pilotage comparateurs</div>
+                <div class="small text-secondary">Performance & acquisition</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Preview 3 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card pilotage p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p3Produit">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Pilotage produit d'assurance</div>
+                <div class="small text-secondary">Performance & rentabilité</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Preview 4 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card pilotage p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p4Web">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Positionnement web</div>
+                <div class="small text-secondary">Acquisition digitale</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Preview 5 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card pilotage p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p5Client">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Connaissance client</div>
+                <div class="small text-secondary">Profils & segmentation</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- RUBRIQUE 2 : EXPLORATOIRE -->
+      <section class="mb-3 rubric rubric--exploratoire">
+        <div class="rubric-bar">
+          <div>
+            <h3 class="h5 rubric-title">Analyse exploratoire & segmentation</h3>
+            <p class="rubric-sub mb-0">Compréhension · explication · identification de leviers</p>
+          </div>
+          <span class="rubric-badge">Python - SQL - Excel - Power BI - Piano Analytics</span>
+        </div>
+      </section>
+
+      <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card exploratoire p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p6Prospects">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Profils prospects</div>
+                <div class="small text-secondary">Segmentation & insights</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card exploratoire p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p7Resil">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Motifs de résiliation</div>
+                <div class="small text-secondary">Analyse & fidélisation</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Preview 9 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card exploratoire p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p9WebPages">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Performance pages web</div>
+                <div class="small text-secondary">Analyse & refonte</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- RUBRIQUE 3 : QUALITÉ / STRUCTURATION -->
+      <section class="mb-3 rubric rubric--qualite">
+        <div class="rubric-bar">
+          <div>
+            <h3 class="h5 rubric-title">Structuration & qualité des données</h3>
+            <p class="rubric-sub mb-0">Fiabilisation · modélisation · socle analytique</p>
+          </div>
+          <span class="rubric-badge">Excel - Gestion de projet</span>
+        </div>
+      </section>
+
+      <div class="row g-3">
+        <!-- Preview 10 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card qualite p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p10Governance">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Qualité des bases clients</div>
+                <div class="small text-secondary">Data governance & exploitabilité</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- ✅ NEW Preview 14 -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card qualite p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p14Dictionary">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Dictionnaire de données E-Business</div>
+                <div class="small text-secondary">Data quality & gouvernance</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">BNP Paribas</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PARTIE 2 : AUTRES REALISATIONS -->
+    <section class="mb-4">
+      <div class="card p-4 rubric" style="background: linear-gradient(135deg, rgba(32, 32, 32, 0.1), rgba(255,255,255,.75)); border-radius:16px;">
+        <h2 class="h4 fw-bold section-title mb-2">Autres réalisations</h2>
+        <p class="text-secondary mb-0">
+          Une sélection de réalisations issues d’expériences passées et de projets personnels.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <div class="row g-3">
+
+        <!-- CARD 11 (AUTRE => VIOLET) -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card other p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p11Skillfit">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">SKILLFIT ANALYZER</div>
+                <div class="small text-secondary">IA multi-agents — analyse de CV & matching</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">Projet IA</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- CARD 12 (AUTRE => VIOLET) -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card other p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p12Tickets">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Agent classificateur de mails</div>
+                <div class="small text-secondary">Automatisation — classification & priorisation</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">Projet IA </span>
+            </div>
+          </button>
+        </div>
+
+        <!-- CARD 13 (AUTRE => VIOLET) -->
+        <div class="col-sm-6 col-lg-4">
+          <button type="button" class="card preview-card other p-3 h-100 w-100 text-start border-0"
+                  data-bs-toggle="modal" data-bs-target="#p13Dreams">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <div>
+                <div class="fw-bold">Synthétiseur de rêves</div>
+                <div class="small text-secondary">IA créative — voix → émotion → image</div>
+                <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
+              </div>
+              <span class="tag">Projet IA</span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- =========================
+     MODALS (DETAILS PROJETS)
+     ========================= -->
+
+<!-- MODAL 1: Cockpit -->
+<div class="modal fade" id="p1Cockpit" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Cockpit Data — dashboard de pilotage stratégique 360° (Direction)</h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary mb-2"><strong>Objectif:</strong> Fournir à la Direction un cockpit de pilotage stratégique offrant une vision 360° de l’activité business (pilotage par produit, commercial, marché digital, cross-sell) pour faciliter la prise de décision.</p>
+        <div class="text-secondary mb-2"><strong>Ce que j’ai fait:</strong>
+          <ul class="mb-0">
+            <li>Cadrage du besoin “Direction” et structuration du cockpit en pages thématiques (produits, commercial, marché, cross-sell…).</li>
+            <li>Modélisation multi-sources et création de KPI décisionnels (tendances, variations, comparaisons, lecture macro).</li>
+            <li>Livraison itérative (V1/V2), documentation et accompagnement utilisateurs.</li>
+          </ul>
+        </div>
+        <div class="text-secondary mb-2"><strong>Livrables:</strong>
+          <ul class="mb-0">
+            <li>Dashboard Power BI - Cockpit Data multi-pages (une ou deux pages pour chaque aspect business)</li>
+            <li>Dictionnaire d’indicateurs & règles de calcul</li>
+            <li>Notes de version & roadmap d’évolutions</li>
+          </ul>
+        </div>
+        <p class="text-secondary mb-0"><strong>Stack:</strong> Power BI · Excel · Data visualisation · Reporting métier </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 2: Canaux -->
+<div class="modal fade" id="p2Canaux" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Pilotage des comparateurs partenaires — performance & acquisition</h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary mb-2"><strong>Objectif:</strong> Concevoir un outil de pilotage pour suivre, comparer et analyser la performance des comparateurs partenaires externes (vues globales, par partenaire, par produit ; analyses hebdo/mensuelles/annuelles) afin d’optimiser l’acquisition et la conversion.</p>
+        <div class="text-secondary mb-2"><strong>Ce que j’ai fait:</strong>
+          <ul class="mb-0">
+            <li>Expression de besoin complète et cadrage des KPI / vues prioritaires.</li>
+            <li>Dashboard Power BI multi-vues (global, partenaire, produit) + analyses temporelles.</li>
+            <li>Modèle évolutif permettant d’intégrer facilement de nouveaux partenaires et indicateurs.</li>
+          </ul>
+        </div>
+        <div class="text-secondary mb-2"><strong>Livrables:</strong>
+          <ul class="mb-0">
+            <li>Dashboard Power BI interactif</li>
+            <li>Dictionnaire de données & dictionnaire de méthodes</li>
+            <li>Dossier projet (contexte, sources, roadmap)</li>
+          </ul>
+        </div>
+        <p class="text-secondary mb-0"><strong>Stack:</strong> Power BI · Excel · Data visualisation · Reporting métier</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 3: Produit -->
+<div class="modal fade" id="p3Produit" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Pilotage d’un produit d'assurance — performance commerciale & rentabilité</h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary mb-2"><strong>Objectif:</strong> Fournir un outil consolidé et lisible pour piloter le produit d'assurance : portefeuille, performance commerciale, coûts et indicateurs de rentabilité, avec une UX adaptée aux besoins métier.</p>
+        <div class="text-secondary mb-2"><strong>Ce que j’ai fait:</strong>
+          <ul class="mb-0">
+            <li>Expression de besoin, priorisation des KPI et définition des règles de calcul.</li>
+            <li>Indicateurs consolidés + drill-down (vue exécutive → détail).</li>
+            <li>Travail UX (lisibilité, navigation) + itérations régulières avec les parties prenantes.</li>
+          </ul>
+        </div>
+        <div class="text-secondary mb-2"><strong>Livrables:</strong>
+          <ul class="mb-0">
+            <li>Dashboard Power BI orienté pilotage</li>
+            <li>Dossier projet & documentation</li>
+            <li>Dictionnaires (données + méthodes)</li>
+          </ul>
+        </div>
+        <p class="text-secondary mb-0"><strong>Stack:</strong> Power BI · Excel · Data visualisation · Reporting métier</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 4: Web -->
+<div class="modal fade" id="p4Web" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Pilotage du positionnement web — acquisition digitale</h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary mb-2"><strong>Objectif:</strong> Suivre la visibilité web (positionnement sur requêtes stratégiques) et comparer les performances par produit / canal / source afin de piloter l’acquisition digitale.</p>
+        <div class="text-secondary mb-2"><strong>Ce que j’ai fait:</strong>
+          <ul class="mb-0">
+            <li>Intégration de données de visibilité web et signaux d’acquisition externe.</li>
+            <li>Structuration modulaire (vues par produit + vues consolidées).</li>
+            <li>Lecture comparative multi-sources + documentation méthodologique.</li>
+          </ul>
+        </div>
+        <div class="text-secondary mb-2"><strong>Livrables:</strong>
+          <ul class="mb-0">
+            <li>Dashboard Power BI interactif</li>
+            <li>Dossier projet & documentation</li>
+            <li>Dictionnaires (données + méthodes)</li>
+          </ul>
+        </div>
+        <p class="text-secondary mb-0"><strong>Stack:</strong>  Power BI · Excel · Data visualisation · Reporting métier</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 5: Connaissance client -->
+<div class="modal fade" id="p5Client" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Connaissance client — dashboard profils & segmentation</h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary mb-2"><strong>Objectif:</strong> Consolider la donnée client et fournir une vision unifiée et fiable des profils pour améliorer la segmentation, le profilage et le pilotage marketing.</p>
+        <div class="text-secondary mb-2"><strong>Ce que j’ai fait:</strong>
+          <ul class="mb-0">
+            <li>Consolidation de plusieurs bases (visiteurs / devis / contrats) dans un référentiel analytique unique.</li>
+            <li>Conception d’une vue "Globale" (photographie complète) + vues “Focus” (comparaison dynamique période/campagne).</li>
+            <li>Lecture data-driven et identification de leviers d’optimisation marketing.</li>
+          </ul>
+        </div>
+        <div class="text-secondary mb-2"><strong>Livrables:</strong>
+          <ul class="mb-0">
+            <li>Dashboard Power BI profils clients</li>
+           <li>Dossier projet & documentation</li>
+            <li>Dictionnaires (données + méthodes)</li>
+          </ul>
+        </div>
+        <p class="text-secondary mb-0"><strong>Stack:</strong> Power BI · Excel · Segmentation · Reporting décisionnel</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 6: Prospects -->
+<div class="modal fade" id="p6Prospects" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">
+            Analyse exploratoire des profils prospects — segmentation & insights
+          </h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-secondary mb-2">
+          <strong>Objectif :</strong>
+          Comprendre une baisse de conversion sur un canal d’acquisition malgré une hausse des visites,
+          identifier des différences de profils prospects et formuler des recommandations actionnables.
+        </p>
+
+        <div class="text-secondary mb-2">
+          <strong>Démarche analytique (Python & BI):</strong>
+          <ul class="mb-0">
+            <li>
+              Cadrage du besoin analytique et définition des indicateurs à analyser
+              (visites, conversions, profils prospects).
+            </li>
+            <li>
+              Préparation et exploration des données en <strong>Python</strong>
+              (<em>pandas, numpy</em>) : analyse des distributions, contrôles de cohérence
+              et mise en évidence des écarts entre profils.
+            </li>
+            <li>
+              Analyses exploratoires et croisées en <strong>Python</strong>
+              (<em>pandas</em>) pour comprendre les variations de performance du canal.
+            </li>
+            <li>
+              Restitution des résultats et des principaux insights dans des
+              <strong>dashboards Excel</strong> et <strong>Power BI</strong>.
+            </li>
+            <li>
+              Formulation de recommandations simples d’optimisation des parcours et du ciblage.
+            </li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Livrables :</strong>
+          <ul class="mb-0">
+            <li>Jeux de données préparés et enrichis sous Python</li>
+            <li>Dashboard analytique Excel</li>
+            <li>Restitution d’insights pour appui à la décision</li>
+            <li>Structure analytique réutilisable sur d’autres sources</li>
+          </ul>
+        </div>
+
+        <p class="text-secondary mb-0">
+          <strong>Stack :</strong>
+          Python (pandas, numpy) · Excel · Power BI · Analyse exploratoire · Data storytelling
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- MODAL 7: Résiliation -->
+<div class="modal fade" id="p7Resil" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">
+            Analyse exploratoire des motifs de résiliation & leviers de fidélisation
+          </h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-secondary mb-2">
+          <strong>Objectif :</strong>
+          Identifier les causes majeures de résiliation, analyser leur évolution dans le temps,
+          segmenter les profils les plus exposés et formuler des leviers de fidélisation concrets,
+          activables par les équipes métier.
+        </p>
+
+        <div class="text-secondary mb-2">
+          <strong>Démarche analytique (Python & BI) :</strong>
+          <ul class="mb-0">
+            <li>
+              Préparation, nettoyage et fiabilisation des données en <strong>Python</strong>
+              (<em>pandas, numpy</em>) : contrôle de qualité, gestion des doublons et des valeurs
+              manquantes, création de variables dérivées clés
+              (ancienneté, durée de vie du contrat, temporalité de la résiliation).
+            </li>
+            <li>
+              Structuration et regroupement sémantique des motifs de résiliation à l’aide de règles
+              métier et de traitements textuels en <strong>Python</strong>
+              (<em>regex, pandas</em>) afin de construire une nomenclature stable et exploitable.
+            </li>
+            <li>
+              Analyses descriptives, croisées et temporelles réalisées en <strong>Python</strong>
+              (<em>pandas, matplotlib, plotly</em>) pour identifier les motifs dominants,
+              les profils clients associés et les signaux d’évolution dans le temps.
+            </li>
+            <li>
+              Segmentation des profils résiliés via des méthodes de clustering en
+              <strong>Python</strong> (<em>scikit-learn</em>) afin de mettre en évidence des patterns
+              comportementaux et des populations prioritaires à adresser.
+            </li>
+            <li>
+              Restitution et mise en valeur des résultats dans un
+              <strong>dashboard Power BI</strong>, alimenté par des jeux de données enrichis et
+              préparés en amont sous Python.
+            </li>
+            <li>
+              Traduction des analyses en recommandations opérationnelles de fidélisation
+              (prix, expérience client, parcours digital, offres de rétention ciblées).
+            </li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Livrables :</strong>
+          <ul class="mb-0">
+            <li>Datasets enrichis et documentés issus des traitements Python</li>
+            <li>Dashboard Power BI exploratoire (motifs, profils, dynamique temporelle)</li>
+            <li>Modèle de données documenté et industrialisable</li>
+            <li>Synthèse analytique avec recommandations de fidélisation ciblées</li>
+          </ul>
+        </div>
+
+        <p class="text-secondary mb-0">
+          <strong>Stack :</strong>
+          Python (pandas, numpy, scikit-learn, matplotlib, plotly) ·
+          Power BI · Analyse exploratoire · Segmentation client · Qualité des données
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL 9: Performance pages web -->
+<div class="modal fade" id="p9WebPages" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Analyse de performance digitale — Pages Univers & Produits (E-business)</h5>
+          <div class="small text-secondary">BNP Paribas Cardif · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-secondary mb-2">
+          <strong>Objectif :</strong>
+          Fournir une analyse globale de la performance de pages stratégiques (pages univers et pages produits) afin d’éclairer les décisions liées à leur optimisation et à leur refonte, en évaluant les grands axes de trafic, d’engagement et de conversion.
+        </p>
+
+        <div class="text-secondary mb-2">
+          <strong>Démarche analytique (Piano & Excel) :</strong>
+          <ul class="mb-0">
+            <li>Cadrage du besoin métier et définition des objectifs d’analyse de performance digitale.</li>
+            <li>Analyse des parcours utilisateurs et des performances globales des pages (trafic, engagement, passage à l’action).</li>
+            <li>Lecture macro des leviers d’acquisition et de la contribution des canaux marketing.</li>
+            <li>Synthèse des enseignements clés et formalisation d’insights actionnables pour orienter les travaux d’optimisation.</li>
+            <li>Restitution des résultats sous forme de supports de pilotage clairs et exploitables.</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Livrables :</strong>
+          <ul class="mb-0">
+            <li>Analyse ad hoc de performance digitale (support de restitution).</li>
+            <li>Fichier de suivi des indicateurs de performance (trafic, engagement, conversion, sources).</li>
+            <li>Synthèse des enseignements et axes d’optimisation à destination des équipes métiers.</li>
+          </ul>
+        </div>
+
+        <p class="text-secondary mb-0"><strong>Stack :</strong> Piano Analytics · Excel · PowerPoint</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 10: Governance -->
+<div class="modal fade" id="p10Governance" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Structuration & qualité des bases de données clients — Data governance & exploitabilité</h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary mb-2"><strong>Objectif :</strong> Réaliser un état des lieux des bases de données clients existantes afin d’évaluer leur niveau de qualité, de cohérence et d’exploitabilité, et définir des axes d’évolution permettant d’harmoniser les données, d’améliorer leur granularité et de faciliter leur usage dans les dispositifs de pilotage, d’analyse et d’automatisation.</p>
+        <div class="text-secondary mb-2"><strong>Ce que j’ai fait :</strong>
+          <ul class="mb-0">
+            <li>Cartographie et analyse exploratoire des différentes bases de données clients.</li>
+            <li>Étude des structures de données, des indicateurs disponibles et de leur niveau de granularité.</li>
+            <li>Analyse de la cohérence, de la complétude et de l’homogénéité des informations entre les bases.</li>
+            <li>Évaluation du potentiel d’exploitabilité des données pour les usages analytiques et décisionnels.</li>
+            <li>Identification des écarts entre l’existant et les besoins métiers (reporting, dashboards, automatisation).</li>
+            <li>Échanges avec les fournisseurs de données et les parties prenantes pour comprendre les contraintes et leviers d’évolution.</li>
+            <li>Rédaction d’expressions de besoin visant à améliorer la qualité, la structure et l’alignement des bases de données.</li>
+            <li>Proposition d’axes de standardisation et d’harmonisation des indicateurs à l’échelle des bases clients.</li>
+          </ul>
+        </div>
+        <div class="text-secondary mb-2"><strong>Livrables :</strong>
+          <ul class="mb-0">
+            <li>État des lieux structuré des bases de données clients existantes.</li>
+            <li>Analyse de l’exploitabilité et du potentiel analytique des données.</li>
+            <li>Documentation des indicateurs disponibles et manquants.</li>
+            <li>Expressions de besoin formalisées à destination des fournisseurs de données.</li>
+            <li>Recommandations pour l’amélioration de la qualité et de la standardisation des données.</li>
+          </ul>
+        </div>
+        <p class="text-secondary mb-0"><strong>Stack :</strong>  Excel · Power BI . PowerPoint</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ MODAL 14: Dictionnaire de données E-Business -->
+<div class="modal fade" id="p14Dictionary" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Dictionnaire de données E-Business — Data quality & gouvernance des indicateurs</h5>
+          <div class="small text-secondary">BNP Paribas · E-Business</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-secondary mb-2">
+          <strong>Objectif :</strong>
+          Mettre en place, enrichir et maintenir un dictionnaire de données centralisé à l’échelle de la BU E-Business afin de garantir une compréhension commune des indicateurs clés,
+          d’améliorer la qualité des données et de sécuriser leur usage dans les dispositifs de pilotage, d’analyse et de prise de décision.
+        </p>
+
+        <div class="text-secondary mb-2">
+          <strong>Ce que j’ai fait :</strong>
+          <ul class="mb-0">
+            <li>Contribution à la structuration et à l’enrichissement du dictionnaire de données E-Business.</li>
+            <li>Recensement des indicateurs suivis par les différentes équipes et métiers de la BU.</li>
+            <li>Formalisation et clarification des définitions métiers, des règles de calcul et des périmètres d’analyse.</li>
+            <li>Identification des sources de données, du data ownership et des usages associés à chaque indicateur.</li>
+            <li>Analyse critique de l’existant afin de challenger la cohérence, la pertinence et la qualité des indicateurs documentés.</li>
+            <li>Proposition d’axes d’amélioration et d’enrichissement du dictionnaire dans un contexte de refonte E-Business.</li>
+            <li>Mise en place d’une démarche d’alimentation et de mise à jour continue du dictionnaire.</li>
+            <li>Collaboration avec les équipes métiers et data pour maintenir un référentiel partagé et à jour.</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Livrables :</strong>
+          <ul class="mb-0">
+            <li>Dictionnaire de données E-Business structuré et enrichi.</li>
+            <li>Documentation des indicateurs clés (définitions, sources, règles de calcul, data ownership).</li>
+            <li>Recommandations d’amélioration et d’évolution du référentiel.</li>
+            <li>Support de restitution et de partage à destination des équipes E-Business.</li>
+          </ul>
+        </div>
+
+        <p class="text-secondary mb-0"><strong>Stack :</strong> Excel · PowerPoint</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 11: SKILLFIT ANALYZER -->
+<div class="modal fade" id="p11Skillfit" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">SKILLFIT ANALYZER — Application multi-agents d’analyse intelligente de CV (IA & Python)</h5>
+          <div class="small text-secondary">Projet personnel / expérimental</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-secondary mb-2">
+          <strong>Objectif :</strong>
+          Concevoir une application basée sur une architecture multi-agents en Python, destinée à automatiser l’analyse de CV et leur mise en correspondance avec des offres d’emploi.
+          La solution vise à accompagner à la fois les recruteurs et les candidats dans l’évaluation des profils et la prise de décision.
+        </p>
+
+        <div class="text-secondary mb-2">
+          <strong>Ce que j’ai fait :</strong>
+          <ul class="mb-0">
+            <li>Conception d’une application IA multi-agents, reposant sur un orchestrateur central et plusieurs agents spécialisés.</li>
+            <li>Développement en Python, avec une architecture modulaire et évolutive.</li>
+            <li>Mise en place d’un pipeline automatisé de récupération des CV directement depuis une boîte mail.</li>
+            <li>Intégration d’un LLM via l’API Groq pour l’analyse sémantique et le scoring de compatibilité.</li>
+            <li>Définition d’une logique de matching objective entre CV et offres d’emploi.</li>
+            <li>Conception d’une solution pensée pour deux usages :
+              <ul class="mt-1">
+                <li><strong>Recruteurs :</strong> analyser plusieurs CV pour une même offre.</li>
+                <li><strong>Candidats :</strong> évaluer un CV face à plusieurs offres.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Principe de fonctionnement :</strong>
+          <ul class="mb-0">
+            <li>Récupération automatique des CV reçus par mail.</li>
+            <li>Analyse IA des CV et des offres d’emploi.</li>
+            <li>Évaluation de la compatibilité via un scoring intelligent.</li>
+            <li>Sélection automatique des profils les plus pertinents selon des critères paramétrables.</li>
+            <li>Génération de contenus d’aide à l’entretien (questionnaires personnalisés).</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Nature du projet :</strong>
+          <ul class="mb-0">
+            <li>Projet personnel / expérimental orienté IA et architecture logicielle.</li>
+            <li>Aucun livrable métier formel : l’objectif est la conception et l’implémentation de la solution.</li>
+            <li>Projet axé sur l’automatisation, la performance et l’équité du processus de recrutement.</li>
+          </ul>
+        </div>
+
+        <p class="text-secondary mb-0">
+          <strong>Stack :</strong>
+          Python · Streamlit · Architecture multi-agents · IA / NLP · API Groq · Programmation Orientée Objet · Pytest
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 12: Agent tickets par e-mail -->
+<div class="modal fade" id="p12Tickets" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Agent de traitement automatique de tickets par e-mail — Automatisation & IA</h5>
+          <div class="small text-secondary">Projet personnel / exercice d’automatisation</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-secondary mb-2">
+          <strong>Objectif :</strong>
+          Développer un agent logiciel capable d’automatiser le traitement de tickets reçus par e-mail, depuis la lecture des messages jusqu’à leur classification, leur priorisation et leur centralisation dans un outil de suivi,
+          afin de simuler un système professionnel de gestion de tickets.
+        </p>
+
+        <div class="text-secondary mb-2">
+          <strong>Ce que j’ai fait :</strong>
+          <ul class="mb-0">
+            <li>Conception d’un agent logiciel de traitement automatique d’e-mails.</li>
+            <li>Mise en place d’un pipeline permettant de lire automatiquement des tickets reçus par mail.</li>
+            <li>Analyse et interprétation du contenu des messages afin d’en extraire les informations clés.</li>
+            <li>Classification automatique des tickets par catégorie métier.</li>
+            <li>Attribution d’un niveau d’urgence pour chaque ticket, du plus trivial au plus critique.</li>
+            <li>Alimentation automatique d’un Google Sheet partagé, structuré par catégories, pour centraliser et exploiter les tickets traités.</li>
+            <li>Simulation d’un fonctionnement proche d’un outil de ticketing professionnel automatisé.</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Principe de fonctionnement :</strong>
+          <ul class="mb-0">
+            <li>Lecture automatique d’une boîte mail contenant des tickets structurés.</li>
+            <li>Analyse du sujet et du contenu de chaque e-mail.</li>
+            <li>Catégorisation du ticket (support, technique, administratif, etc.).</li>
+            <li>Évaluation du niveau d’urgence selon l’impact du problème.</li>
+            <li>Génération d’une synthèse du ticket.</li>
+            <li>Écriture automatique des informations clés dans l’onglet correspondant du Google Sheet.</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Nature des données traitées :</strong>
+          <ul class="mb-0">
+            <li>Boîte mail contenant plusieurs centaines d’e-mails simulant des tickets utilisateurs.</li>
+            <li>Chaque ticket comprend un sujet et un contenu textuel.</li>
+            <li>Cas variés représentant des situations réelles de support (technique, accès, demandes utilisateurs, incidents, bugs).</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Objectifs du projet :</strong>
+          <ul class="mb-0">
+            <li>Automatiser un processus manuel chronophage.</li>
+            <li>Structurer et centraliser l’information issue d’e-mails non structurés.</li>
+            <li>Prioriser les demandes selon leur niveau d’urgence.</li>
+            <li>Faciliter le pilotage et le suivi des tickets via un support unique.</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Nature du projet :</strong>
+          <ul class="mb-0">
+            <li>Projet personnel / exercice d’automatisation orienté data et IA.</li>
+            <li>Aucun livrable métier formel : l’objectif est la conception et le fonctionnement de la solution.</li>
+            <li>Projet axé sur la simulation de cas réels rencontrés dans des environnements professionnels IT ou support.</li>
+          </ul>
+        </div>
+
+        <p class="text-secondary mb-0">
+          <strong>Stack :</strong>
+          Python · Streamlit · Traitement automatique de texte · Classification · Automatisation e-mails · API (google, gmail) · LLM / API Groq · Pytest 
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 13: Synthétiseur de rêves -->
+<div class="modal fade" id="p13Dreams" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold mb-0">Synthétiseur de rêves — Application IA de génération créative & analyse émotionnelle</h5>
+          <div class="small text-secondary">Projet personnel · IA créative & data émotionnelle</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-secondary mb-2">
+          <strong>Objectif :</strong>
+          Concevoir une application web immersive permettant à un utilisateur de raconter un rêve à l’oral et de le transformer automatiquement en contenu visuel,
+          tout en analysant l’ambiance émotionnelle du rêve et en conservant un historique personnel.
+          L’application vise à proposer une expérience créative, introspective et réutilisable, à la croisée de l’IA, de l’audio et de la génération d’images.
+        </p>
+
+        <div class="text-secondary mb-2">
+          <strong>Ce que j’ai fait :</strong>
+          <ul class="mb-0">
+            <li>Conception d’une application IA orientée expérience utilisateur et narration personnelle.</li>
+            <li>Mise en place d’un pipeline de traitement complet, de la voix à l’image.</li>
+            <li>Transcription automatique de récits audio en texte.</li>
+            <li>Analyse du contenu textuel afin d’identifier l’émotion dominante du rêve.</li>
+            <li>Génération d’images illustrant le rêve à partir du texte analysé.</li>
+            <li>Conception d’un espace personnel permettant de consulter l’historique des rêves.</li>
+            <li>Réflexion UX autour d’un usage fluide, intuitif et engageant.</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Principe de fonctionnement :</strong>
+          <ul class="mb-0">
+            <li>L’utilisateur enregistre ou importe un rêve au format audio.</li>
+            <li>Le système transcrit automatiquement le récit.</li>
+            <li>Le texte est analysé pour détecter l’ambiance émotionnelle du rêve.</li>
+            <li>Une image est générée à partir du contenu narratif.</li>
+            <li>Le rêve est sauvegardé et consultable dans un tableau de bord personnel.</li>
+          </ul>
+        </div>
+
+        <div class="text-secondary mb-2">
+          <strong>Nature du projet :</strong>
+          <ul class="mb-0">
+            <li>Projet personnel, orienté IA créative et data émotionnelle.</li>
+            <li>Approche à la fois technique et produit, intégrant UX, automatisation et IA générative.</li>
+            <li>Application pensée comme un outil d’exploration personnelle et de suivi émotionnel dans le temps.</li>
+          </ul>
+        </div>
+
+        <p class="text-secondary mb-0">
+          <strong>Stack :</strong>
+          Python · Streamlit · IA générative · Speech-to-Text · Analyse de texte · Génération d’images · APIs IA (Groq, Mistral, Clipdrop) · Git
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <div>© <span id="y"></span> Adrien AKILAL — Tous droits réservés.</div>
+    <div class="text-secondary">
+      <a class="small-link" href="contact.html">Contact</a> ·
+      <a class="small-link" href="assets/pdf/CV_Adrien_AKILAL_FR.pdf" target="_blank" rel="noopener">CV FR</a> ·
+      <a class="small-link" href="assets/pdf/CV_Adrien_AKILAL_EN.pdf" target="_blank" rel="noopener">CV EN</a> ·
+      <a class="small-link" href="https://linkedin.com/in/adrien-akilal" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>

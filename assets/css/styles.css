@@ -37,6 +37,10 @@ body{
   background: linear-gradient(135deg, #ffffff 0%, #f2f6ff 100%);
   border: 1px solid rgba(13,110,253,.12);
 }
+/* Align Data Analyst title with Positionnement */
+.hero .mobile-header-layout{margin-bottom:0 !important;}
+.hero .col-lg-6:first-child h4{margin-top:1.5rem !important;}
+@media (min-width: 992px){.hero .display-5{margin-top:-1.5rem;} .hero .col-lg-6:first-child h4{margin-top:1rem !important;}}
 .badge-skill{
   background: rgba(13,110,253,.08);
   color: var(--brand);

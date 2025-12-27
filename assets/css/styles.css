@@ -111,8 +111,8 @@ blockquote{
     flex-shrink: 0;
   }
   .mobile-header-layout {
-    justify-content: space-between !important;
-    gap: 0.5rem !important;
+    justify-content: flex-start !important;
+    gap: 6rem !important;
   }
   .mobile-header-layout h1 {
     flex-shrink: 1;

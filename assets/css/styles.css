@@ -102,3 +102,12 @@ blockquote{
   padding-left: 1rem;
   color: var(--muted);
 }
+
+/* Mobile avatar styling */
+@media (max-width: 991.98px) {
+  .avatar-mobile {
+    width: 80px !important;
+    height: 80px !important;
+    flex-shrink: 0;
+  }
+}

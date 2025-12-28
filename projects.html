@@ -38,6 +38,11 @@
       padding: 14px 16px;
       background: rgba(255,255,255,.65);
       backdrop-filter: blur(6px);
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+    .rubric .rubric-bar:hover{
+      background: rgba(255,255,255,.85);
     }
     .rubric .rubric-title{
       margin:0;
@@ -147,6 +152,42 @@
     .modal-title{ color: var(--ink); }
 
     button.card{ background: transparent; }
+
+    /* Collapse styles */
+    .rubric-content {
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+    }
+    .rubric-content.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    .collapse-icon {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .collapsed-section .collapse-icon {
+      transform: rotate(-90deg);
+    }
+
+    /* Responsive layout for rubric bars */
+    @media (max-width: 768px) {
+      .rubric .rubric-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .rubric .rubric-bar > div {
+        width: 100%;
+      }
+      .rubric-badge {
+        align-self: flex-start;
+      }
+    }
   </style>
 </head>
 
@@ -201,24 +242,27 @@
       </div>
 
       <!-- RUBRIQUE 1 : PILOTAGE -->
-      <section class="mb-3 rubric rubric--pilotage">
-        <div class="rubric-bar">
-          <div>
-            <h3 class="h5 rubric-title">Pilotage & reporting décisionnel</h3>
+      <section class="mb-3 rubric rubric--pilotage collapsed-section" id="rubricPilotage">
+        <div class="rubric-bar" onclick="toggleRubric('pilotage')">
+          <div style="flex: 1;">
+            <h3 class="h5 rubric-title">
+              <span class="collapse-icon">▼</span>
+              Pilotage & reporting décisionnel
+            </h3>
             <p class="rubric-sub mb-0">Suivi de la performance · aide à la décision · dashboards métier</p>
           </div>
           <span class="rubric-badge">Excel - Power BI - SQL - Gestion de projets</span>
         </div>
       </section>
 
-      <div class="row g-3 mb-4">
+      <div class="row g-3 mb-4 rubric-content collapsed" id="pilotageContent">
         <!-- Preview 1 -->
         <div class="col-sm-6 col-lg-4">
           <button type="button" class="card preview-card pilotage p-3 h-100 w-100 text-start border-0"
                   data-bs-toggle="modal" data-bs-target="#p1Cockpit">
             <div class="d-flex justify-content-between align-items-start gap-2">
               <div>
-                <div class="fw-bold">Cockpit Data 360°</div>
+                <div class="fw-bold">Pilotage business 360°</div>
                 <div class="small text-secondary">Pilotage 360° — Direction</div>
                 <div class="preview-cta"><span class="dot"></span><span>Ouvrir le détail</span></div>
               </div>
@@ -289,17 +333,20 @@
       </div>
 
       <!-- RUBRIQUE 2 : EXPLORATOIRE -->
-      <section class="mb-3 rubric rubric--exploratoire">
-        <div class="rubric-bar">
-          <div>
-            <h3 class="h5 rubric-title">Analyse exploratoire & segmentation</h3>
+      <section class="mb-3 rubric rubric--exploratoire collapsed-section" id="rubricExploratoire">
+        <div class="rubric-bar" onclick="toggleRubric('exploratoire')">
+          <div style="flex: 1;">
+            <h3 class="h5 rubric-title">
+              <span class="collapse-icon">▼</span>
+              Analyse exploratoire & segmentation
+            </h3>
             <p class="rubric-sub mb-0">Compréhension · explication · identification de leviers</p>
           </div>
           <span class="rubric-badge">Python - SQL - Excel - Power BI - Piano Analytics</span>
         </div>
       </section>
 
-      <div class="row g-3 mb-4">
+      <div class="row g-3 mb-4 rubric-content collapsed" id="exploratoireContent">
         <div class="col-sm-6 col-lg-4">
           <button type="button" class="card preview-card exploratoire p-3 h-100 w-100 text-start border-0"
                   data-bs-toggle="modal" data-bs-target="#p6Prospects">
@@ -345,17 +392,20 @@
       </div>
 
       <!-- RUBRIQUE 3 : QUALITÉ / STRUCTURATION -->
-      <section class="mb-3 rubric rubric--qualite">
-        <div class="rubric-bar">
-          <div>
-            <h3 class="h5 rubric-title">Structuration & qualité des données</h3>
+      <section class="mb-3 rubric rubric--qualite collapsed-section" id="rubricQualite">
+        <div class="rubric-bar" onclick="toggleRubric('qualite')">
+          <div style="flex: 1;">
+            <h3 class="h5 rubric-title">
+              <span class="collapse-icon">▼</span>
+              Structuration & qualité des données
+            </h3>
             <p class="rubric-sub mb-0">Fiabilisation · modélisation · socle analytique</p>
           </div>
           <span class="rubric-badge">Excel - Gestion de projet</span>
         </div>
       </section>
 
-      <div class="row g-3">
+      <div class="row g-3 rubric-content collapsed" id="qualiteContent">
         <!-- Preview 10 -->
         <div class="col-sm-6 col-lg-4">
           <button type="button" class="card preview-card qualite p-3 h-100 w-100 text-start border-0"
@@ -390,17 +440,29 @@
     </section>
 
     <!-- PARTIE 2 : AUTRES REALISATIONS -->
-    <section class="mb-4">
-      <div class="card p-4 rubric" style="background: linear-gradient(135deg, rgba(32, 32, 32, 0.1), rgba(255,255,255,.75)); border-radius:16px;">
-        <h2 class="h4 fw-bold section-title mb-2">Autres réalisations</h2>
-        <p class="text-secondary mb-0">
-          Une sélection de réalisations issues d’expériences passées et de projets personnels.
-        </p>
-      </div>
-    </section>
-
     <section class="mb-5">
-      <div class="row g-3">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3 p-3" style="background: linear-gradient(135deg, rgba(30, 30, 31, 0.08), rgba(255,255,255,.65)); border-radius: 12px; border: 1px solid rgba(0,0,0,.06);">
+        <div>
+          <h2 class="h4 fw-bold section-title mb-1">Autres réalisations</h2>
+        </div>
+        <div class="text-secondary">Une sélection de réalisations issues d'expériences passées et de projets personnels.</div> <br>
+      </div>
+
+      <!-- RUBRIQUE : PROJETS IA -->
+      <section class="mb-3 rubric collapsed-section" id="rubricAutres" style="background: linear-gradient(135deg, var(--purple-soft), rgba(255,255,255,.65));">
+        <div class="rubric-bar" onclick="toggleRubric('autres')">
+          <div style="flex: 1;">
+            <h3 class="h5 rubric-title">
+              <span class="collapse-icon">▼</span>
+              Projets IA & Automatisation
+            </h3>
+            <p class="rubric-sub mb-0">Solutions IA autonomes · analyse sémantique · automatisation métier</p>
+          </div>
+          <span class="rubric-badge">Python - Architecture multi-agents - API IA - Streamlit - Pytest</span>
+        </div>
+      </section>
+
+      <div class="row g-3 rubric-content collapsed" id="autresContent">
 
         <!-- CARD 11 (AUTRE => VIOLET) -->
         <div class="col-sm-6 col-lg-4">
@@ -446,8 +508,8 @@
             </div>
           </button>
         </div>
-
       </div>
+
     </section>
 
   </div>
@@ -1173,6 +1235,50 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  // Fonction pour gérer le toggle des sections
+  function toggleRubric(rubricId) {
+    const section = document.getElementById('rubric' + rubricId.charAt(0).toUpperCase() + rubricId.slice(1));
+    const content = document.getElementById(rubricId + 'Content');
+
+    if (!content) return;
+
+    // Toggle collapsed class
+    section.classList.toggle('collapsed-section');
+    content.classList.toggle('collapsed');
+
+    // Set max-height for animation
+    if (!content.classList.contains('collapsed')) {
+      content.style.maxHeight = content.scrollHeight + 'px';
+    } else {
+      content.style.maxHeight = '0px';
+    }
+  }
+
+  // Initialiser la hauteur max-height à 0 au chargement
+  window.addEventListener('DOMContentLoaded', function() {
+    const pilotageContent = document.getElementById('pilotageContent');
+    if (pilotageContent) {
+      pilotageContent.style.maxHeight = '0px';
+    }
+
+    const exploratoireContent = document.getElementById('exploratoireContent');
+    if (exploratoireContent) {
+      exploratoireContent.style.maxHeight = '0px';
+    }
+
+    const qualiteContent = document.getElementById('qualiteContent');
+    if (qualiteContent) {
+      qualiteContent.style.maxHeight = '0px';
+    }
+
+    const autresContent = document.getElementById('autresContent');
+    if (autresContent) {
+      autresContent.style.maxHeight = '0px';
+    }
+  });
+</script>
 </body>
 </html>
